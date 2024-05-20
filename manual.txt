@@ -1,0 +1,3 @@
+cd client and then npm start
+parallely make second tereminal
+npx nodemon server/server
