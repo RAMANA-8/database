@@ -1,55 +1,84 @@
-#include<iostream.h> #include<conio.h> #include<stdlib.h>
-//using namespace std; class queue
-{
-int queue1[5];
-int rear,front; public:
-queue()
-{
-rear=-1; front=-1; }
-void insert(int x)
-{
-if(rear > 4)
-{
-cout <<"queue over flow"; front=rear=-1; return;
-}
- 
+#include<bits/stdc++.h> // For using exit()
 
-queue1[++rear]=x; cout <<"inserted" <<x;
-}
-void delet()
-{
-if(front==rear)
-{
-cout <<"queue under flow"; return;
-}
-cout <<"deleted" <<queue1[++front];
-}
-void display()
-{
-if(rear==front)
-{
-cout <<" queue empty"; return;
-}
-for(int i=front+1;i<=rear;i++) cout <<queue1[i]<<" ";
-}
+using namespace std; // Allows us to avoid writing std::cout, std::cin, etc.
+
+class queue {
+    int queue1[5];  // Fixed size queue
+    int rear, front;  // Rear and front pointers
+
+public:
+    // Constructor initializes front and rear to -1
+    queue() {
+        rear = -1;
+        front = -1;
+    }
+
+    // Insert element into the queue
+    void insert(int x) {
+        // Check for queue overflow
+        if(rear >= 4) {  // Fixed condition (rear >= 4 for 5 elements)
+            cout << "Queue overflow\n";
+            front = rear = -1;  // Reset the queue
+            return;
+        }
+        queue1[++rear] = x;  // Increment rear and insert the element
+        cout << "Inserted " << x << endl;
+    }
+
+    // Delete element from the queue
+    void delet() {
+        // Check for queue underflow
+        if(front == rear) {
+            cout << "Queue underflow\n";
+            return;
+        }
+        cout << "Deleted " << queue1[++front] << endl;  // Increment front and delete the element
+    }
+
+    // Display elements in the queue
+    void display() {
+        // If the queue is empty
+        if(rear == front) {
+            cout << "Queue is empty\n";
+            return;
+        }
+        // Loop through the queue to display elements
+        for(int i = front + 1; i <= rear; i++)
+            cout << queue1[i] << " ";
+        cout << endl;
+    }
 };
-main()
-{
-Clrscr(); int ch; queue qu;
 
-while(1)
-{
-cout <<"\n1.insert 2.delet 3.display 4.exit\nEnter ur choice"; cin >> ch;
-switch(ch)
-{
-case 1:	cout <<"enter the element"; cin >> ch;
-qu.insert(ch); break;
-case 2: qu.delet(); break;
-case 3: qu.display(); break;
- 
+// Main function
+int main() {
+    int ch;  // Variable to store choice
+    queue qu;  // Create an object of the queue class
 
-case 4: exit(0);
-}
-}
-return (0);
+    // Infinite loop for menu-driven program
+    while(1) {
+        // Menu options
+        cout << "\n1. Insert 2. Delete 3. Display 4. Exit\nEnter your choice: ";
+        cin >> ch;
+
+        // Switch-case for different choices
+        switch(ch) {
+            case 1:
+                cout << "Enter the element to insert: ";
+                cin >> ch;  // Reusing 'ch' for the element to be inserted
+                qu.insert(ch);  // Insert the element
+                break;
+            case 2:
+                qu.delet();  // Call delete function
+                break;
+            case 3:
+                qu.display();  // Display the queue
+                break;
+            case 4:
+                exit(0);  // Exit the program
+            default:
+                cout << "Invalid choice. Please try again.\n";  // Handle invalid input
+        }
+    }
+
+    return 0;
 }
